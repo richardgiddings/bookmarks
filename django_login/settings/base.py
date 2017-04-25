@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'bookmark_app',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,8 +73,9 @@ LOGIN_REDIRECT_URL = 'home'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bookmarks',
+        'USER': 'postgres',
     }
 }
 
