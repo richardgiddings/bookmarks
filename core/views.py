@@ -45,7 +45,7 @@ def activate(request, uidb64, token):
         user.profile.email_confirmed = True
         user.save()
         login(request, user)
-        return redirect('home')
+        return redirect('bookmarks:home')
     else:
         return render(request, 'account_activation_invalid.html')
 
