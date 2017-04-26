@@ -66,7 +66,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'django_login.wsgi.application'
 
 LOGIN_REDIRECT_URL = 'bookmarks:home'
-
+LOGIN_URL = 'login'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if user.is_authenticated %}
 
     {% for link in links %}
         <div>
@@ -15,7 +14,4 @@
     {% endfor %}
     <a href={% url 'bookmarks:home' %}>Back</a> 
 
-{% else %}
-    <p>Did you want the login page? If so click <a href={% url 'login' %}>here</a>.</p>
-{% endif %}
 {% endblock %}
