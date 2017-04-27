@@ -1,25 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
 
-{% for list in lists %}
-    <div>
-        <div id="list-{{ list.id }}">
-            {{list.title}}
-        </div>
-        <form action="{% url 'bookmarks:links' %}" method="get">
-            <div id="subjects-{{ list.id }}" style="display:none;">
+<div class="panel panel-info">
+    <div class="panel-heading">Lists for {{ user.username }}</div>
+    <div class="list-group">
+    {% for list in lists %}
+        <button class="list-group-item" id="list-{{ list.id }}">{{list.title}}</button>
+        <div class="list-group" id="subjects-{{ list.id }}" style="display:none;">
+            <form action="{% url 'bookmarks:links' %}" method="get">
                 {% for subject in list.subject.all %}
-                    <button type="submit" name="subject" value="{{ subject.id }}">
+                    <button type="submit" class="list-group-item" name="subject" value="{{ subject.id }}">
                         {{ subject.title }}
                     </button>
                 {% endfor %}
-            </div>
-        </form>
+            </form>
+        </div>
+    {% endfor %}
     </div>
-
-{% endfor %}
+</div>
 
 <p>Click <a href={% url 'logout' %}>here</a> to log out.</p>
 {% endblock %}

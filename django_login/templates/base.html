@@ -4,7 +4,14 @@
 <html lang="en">
     <head>
         <title>{% block title %}Login{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" type="text/css" href="{% static '/django_login/auth_style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static '/django_login/style.css' %}" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <script src="https://use.fontawesome.com/73fb701cc7.js"></script>
         <script
           src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -19,7 +26,13 @@
         });
         </script>
     </head>
-    <body>
-        {% block content %}{% endblock %}
+    <body>   
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>
