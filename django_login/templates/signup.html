@@ -1,10 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<div class="panel panel-default">
+    <div class="panel-heading">Registration page</div>
+    <div class="panel-body">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">                            
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">{% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                <p>{{field}}</p>
+                <p class="help-block">{{ field.help_text|safe }}</p>
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            {{ error|escape }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                 <input type="submit" class="btn btn-default btn-block" value="REGISTER"/>
+            </div>
+        </form>
+        <p class="text-center">Click <a href="{% url 'login' %}">here</a> to return to the login page.</p>
+    </div>
+</div>
 {% endblock %}
