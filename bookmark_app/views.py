@@ -12,9 +12,11 @@ def home(request):
 @login_required
 def links(request):
 
-    subject = request.GET.get('subject')
+    subject_id = request.GET.get('subject')
+    subject = Subject.objects.get(id=subject_id)
 
-    links = Link.objects.filter(subject=subject)
+    links = Link.objects.filter(subject=subject_id)
     links = links.order_by('display_text')
 
-    return render(request, template_name='links.html', context={'links': links})
+    return render(request, template_name='links.html', 
+                  context={'links': links, 'subject': subject})

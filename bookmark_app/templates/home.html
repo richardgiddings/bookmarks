@@ -1,24 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="panel panel-info">
-    <div class="panel-heading">Lists for {{ user.username }}</div>
-    <div class="list-group">
-    {% for list in lists %}
-        <button class="list-group-item" id="list-{{ list.id }}">{{list.title}}</button>
-        <div class="list-group" id="subjects-{{ list.id }}" style="display:none;">
-            <form action="{% url 'bookmarks:links' %}" method="get">
-                {% for subject in list.subject.all %}
-                    <button type="submit" class="list-group-item" name="subject" value="{{ subject.id }}">
-                        {{ subject.title }}
-                    </button>
-                {% endfor %}
-            </form>
-        </div>
-    {% endfor %}
+<h1>Lists for {{ user.username }}</h1>
+<div class="list-group">
+{% for list in lists %}
+    <button class="list-group-item" id="list-{{ list.id }}"><h3>{{list.title}}</h3></button>
+    <div class="list-group" id="subjects-{{ list.id }}" style="display:none;">
+        <form action="{% url 'bookmarks:links' %}" method="get">
+            {% for subject in list.subject.all %}
+                <button type="submit" class="list-group-item" name="subject" value="{{ subject.id }}">
+                    {{ subject.title }}
+                </button>
+            {% endfor %}
+        </form>
+        <nav class="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add subject to <strong>{{list.title}}</strong></a></li>
+            </ul>
+        </nav>
     </div>
+{% endfor %}
 </div>
+<nav class="navbar">
+    <ul class="nav navbar-nav">
+        <li><a href="#">Add list</a></li>
+        <li><a href={% url 'logout' %}>Logout</a></li>
+    </ul>
+</nav>
 
-<p>Click <a href={% url 'logout' %}>here</a> to log out.</p>
 {% endblock %}
