@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import List, Subject, Link
+from .models import List, Section, Link
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -12,11 +12,11 @@ def home(request):
 @login_required
 def links(request):
 
-    subject_id = request.GET.get('subject')
-    subject = Subject.objects.get(id=subject_id)
+    section_id = request.GET.get('section')
+    section = Section.objects.get(id=section_id)
 
-    links = Link.objects.filter(subject=subject_id)
+    links = Link.objects.filter(subject=section_id)
     links = links.order_by('display_text')
 
     return render(request, template_name='links.html', 
-                  context={'links': links, 'subject': subject})
+                  context={'links': links, 'section': section})

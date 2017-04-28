@@ -9,9 +9,9 @@ class List(models.Model):
     def __str__(self):
         return self.title
 
-class Subject(models.Model):
-    title = models.CharField(max_length=30, help_text="Title of subject")
-    the_list = models.ForeignKey(List, related_name='subject')
+class Section(models.Model):
+    title = models.CharField(max_length=30, help_text="Title of section")
+    the_list = models.ForeignKey(List, related_name='section')
 
     def __str__(self):
         return self.title
@@ -23,7 +23,7 @@ class Link(models.Model):
     notes = models.TextField(max_length=500, blank=True,
                              help_text="Additional notes for link")
 
-    subject = models.ForeignKey(Subject, related_name='link')
+    section = models.ForeignKey(Section, related_name='link')
 
     def __str__(self):
         return self.url
