@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ section.title }}</h1>
-<nav class="navbar">
+<h1><a data-toggle="collapse" href="#section_controls" aria-expanded="false" aria-controls="section_controls">{{ section.title }}</a></h1>
+<nav class="navbar collapse" id="section_controls">
     <ul class="nav navbar-nav">
-        <li><a href="{% url 'bookmarks:edit_section' section.id %}"><i class="fa fa-pencil"></i>&nbsp;Edit section</a></li> 
+        <li><a class="navbar-link" href="{% url 'bookmarks:edit_section' section.id %}"><i class="fa fa-pencil"></i>&nbsp;Edit section</a></li> 
         <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#sectionModal" data-id="{{ section.id }}"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete section</button></li>
     </ul>
 </nav>
