@@ -6,3 +6,10 @@ body {
     display: inline-block;
     float: none;
 }
+
+.links {
+    background-color: #89bdd3 !important;
+}
+.sections {
+    color: #428bca !important;
+}
