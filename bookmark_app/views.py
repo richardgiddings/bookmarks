@@ -37,8 +37,6 @@ def edit_list(request, list_id):
     the_list = List.objects.get(pk=list_id)
     if the_list.user != request.user:
         return HttpResponseRedirect(reverse('bookmarks:home'))
-    else:
-        the_list = List(user=request.user)
 
     form = ListForm(request.POST or None, instance=the_list)
     if request.POST:
@@ -47,6 +45,13 @@ def edit_list(request, list_id):
             return HttpResponseRedirect(reverse('bookmarks:home'))
     return render(request, template_name='modify.html', 
                            context={'form': form, 'title': 'Edit list'})
+
+@login_required
+def delete_list(request):
+    list_id = request.POST.get('id', '')
+    the_list = List.objects.get(pk=list_id)
+    the_list.delete()
+    return HttpResponseRedirect(reverse('bookmarks:home'))
 
 @login_required
 def add_section(request, list_id):
@@ -71,6 +76,13 @@ def edit_section(request, section_id):
                                         kwargs={'section_id':section_id}))
     return render(request, template_name='modify.html', 
                            context={'form': form, 'title': 'Edit section'})
+
+@login_required
+def delete_section(request):
+    section_id = request.POST.get('id', '')
+    section = Section.objects.get(pk=section_id)
+    section.delete()
+    return HttpResponseRedirect(reverse('bookmarks:home'))
 
 @login_required
 def add_link(request, section_id):
@@ -98,13 +110,6 @@ def edit_link(request, link_id):
                            context={'form': form, 'title': 'Edit link'})
 
 @login_required
-def delete_section(request):
-    section_id = request.POST.get('id', '')
-    section = Section.objects.get(pk=section_id)
-    section.delete()
-    return HttpResponseRedirect(reverse('bookmarks:home'))
-
-@login_required
 def delete_link(request):
     link_id = request.POST.get('id', '')
     link = Link.objects.get(pk=link_id)
@@ -112,4 +117,5 @@ def delete_link(request):
     link.delete()
     return HttpResponseRedirect(reverse('bookmarks:links', 
                                         kwargs={'section_id':section_id}))
+
 

@@ -8,6 +8,7 @@ urlpatterns = [
 
     url(r'^add_list/$', views.add_list, name='add_list'),
     url(r'^edit_list/(?P<list_id>\d+)$', views.edit_list, name='edit_list'),
+    url(r'^delete_list/$', views.delete_list, name='delete_list'),
 
     url(r'^add_section/(?P<list_id>\d+)$', views.add_section, name='add_section'),
     url(r'^edit_section/(?P<section_id>\d+)$', views.edit_section, name='edit_section'),
