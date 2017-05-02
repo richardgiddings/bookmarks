@@ -11,10 +11,15 @@
             <a href="{% url 'bookmarks:links' section.id %}" class="list-group-item sections">{{ section.title }}</a>
         {% endfor %}
         <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'bookmarks:edit_list' list.id %}"><i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit&nbsp;list</i></a></li>
-                <li><a href="#" data-toggle="modal" data-target="#listModal" data-id="{{ list.id }}"><i class="fa fa-trash-o" aria-hidden="true">&nbsp;Delete&nbsp;list</i></a></li>
-                <li><a href="{% url 'bookmarks:add_section' list.id %}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add section to <strong>{{list.title}}</strong></a></li>
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'bookmarks:add_section' list.id %}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add section to <strong>{{list.title}}</strong></a></li>
+                        <li><a href="{% url 'bookmarks:edit_list' list.id %}"><i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit&nbsp;list</i></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#listModal" data-id="{{ list.id }}"><i class="fa fa-trash-o" aria-hidden="true">&nbsp;Delete&nbsp;list</i></a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>
