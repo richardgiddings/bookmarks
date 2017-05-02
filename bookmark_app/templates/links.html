@@ -4,8 +4,8 @@
 <h1>{{ section.title }}</h1>
 <nav class="navbar">
     <ul class="nav navbar-nav">
-        <li><a href="#"><i class="fa fa-pencil"></i>&nbsp;Edit section</a></li> 
-        <li><a href="#"><i class="fa fa-trash-o"></i>&nbsp;Delete section</a></li>
+        <li><a href="{% url 'bookmarks:edit_section' section.id %}"><i class="fa fa-pencil"></i>&nbsp;Edit section</a></li> 
+        <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#sectionModal" data-id="{{ section.id }}"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete section</button></li>
     </ul>
 </nav>
 <div class="list-group">
@@ -16,17 +16,83 @@
             <p class="text-muted" style="word-wrap: break-word;">{{ link.url }}</p>
         </a>
         <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit</a></li> 
-                <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</a></li>
-            </ul>
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-link" href="{% url 'bookmarks:edit_link' link.id %}"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit</a></li>
+                    <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#linkModal" data-id="{{ link.id }}"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</button></li>
+                </ul>
+            </div>
         </nav>
     {% endfor %}
 </div>
 <nav class="navbar">
     <ul class="nav navbar-nav">
-        <li><a href="#">Add link to <strong>{{ section.title }}</strong></a></li>
+        <li><a href="{% url 'bookmarks:add_link' section.id %}">Add link to <strong>{{ section.title }}</strong></a></li>
         <li><a href={% url 'bookmarks:home' %}>Back</a></li>
     </ul>
 </nav>
+
+<!-- modal for deleting a link -->
+<div class="modal fade" id="linkModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete link</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this link?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'bookmarks:delete_link' %}" method="post">{% csrf_token %}
+            <input type="hidden" id="id" name="id" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal for deleting a dection -->
+<div class="modal fade" id="sectionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete section</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this section? You will lose all associated links.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'bookmarks:delete_section' %}" method="post">{% csrf_token %}
+            <input type="hidden" id="id" name="id" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- script for setting id of link to delete in modal -->
+<script>
+$('#linkModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id'); 
+    var modal = $(this);
+    modal.find('#id').val(id);
+})
+</script>
+
+<!-- script for setting id of section to delete in modal -->
+<script>
+$('#sectionModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id'); 
+    var modal = $(this);
+    modal.find('#id').val(id);
+})
+</script>
 {% endblock %}

@@ -6,16 +6,12 @@
 {% for list in lists %}
     <button class="list-group-item" id="list-{{ list.id }}"><h3>{{list.title}}</h3></button>
     <div class="list-group" id="sections-{{ list.id }}" style="display:none;">
-        <form action="{% url 'bookmarks:links' %}" method="get">
-            {% for section in list.section.all %}
-                <button type="submit" class="list-group-item" name="section" value="{{ section.id }}">
-                    {{ section.title }}
-                </button>
-            {% endfor %}
-        </form>
+        {% for section in list.section.all %}
+            <a href="{% url 'bookmarks:links' section.id %}" class="list-group-item">{{ section.title }}</a>
+        {% endfor %}
         <nav class="navbar">
             <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add section to <strong>{{list.title}}</strong></a></li>
+                <li><a href="{% url 'bookmarks:add_section' list.id %}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add section to <strong>{{list.title}}</strong></a></li>
             </ul>
         </nav>
     </div>
@@ -23,7 +19,7 @@
 </div>
 <nav class="navbar">
     <ul class="nav navbar-nav">
-        <li><a href="#">Add list</a></li>
+        <li><a href="{% url 'bookmarks:add_list' %}">Add list</a></li>
         <li><a href={% url 'logout' %}>Logout</a></li>
     </ul>
 </nav>
