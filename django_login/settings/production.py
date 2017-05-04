@@ -7,8 +7,6 @@ from .base import *
 import os
 import dj_database_url
 
-ALLOWED_HOSTS = ['*']
-
 env = os.environ.copy()
 SECRET_KEY = env['SECRET_KEY']
 
@@ -41,3 +39,5 @@ EMAIL_HOST_USER = env['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = env['DEFAULT_FROM_EMAIL'] # e.g 'Admin <noreply@example.com>'
+
+ALLOWED_HOSTS = ['*']
