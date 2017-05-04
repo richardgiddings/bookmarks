@@ -41,3 +41,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = env['DEFAULT_FROM_EMAIL'] # e.g 'Admin <noreply@example.com>'
 
 ALLOWED_HOSTS = ['*']
+
+ADMINS = (('Richard Giddings', 'mail@richardgiddings.co.uk'),)
