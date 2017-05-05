@@ -21,7 +21,7 @@ DATABASES['default'].update(db_from_env)
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(os.path.dirname(PROJECT_DIR), 'static')
+STATIC_ROOT = os.path.join(os.path.dirname(PROJECT_DIR), 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
