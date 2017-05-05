@@ -45,4 +45,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
 
-ADMINS = (('Richard Giddings', 'mail@richardgiddings.co.uk'),)
+ADMINS = ((env['ADMIN_NAME'], env['ADMIN_EMAIL']),)
