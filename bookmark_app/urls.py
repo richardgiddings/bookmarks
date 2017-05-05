@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'bookmarks'
 urlpatterns = [
-    url(r'^/$', views.home, name='home'),
+    url(r'^$', views.home, name='home'),
     url(r'^links/(?P<section_id>\d+)$', views.links, name='links'),
 
     url(r'^add_list/$', views.add_list, name='add_list'),
