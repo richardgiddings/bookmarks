@@ -10,6 +10,10 @@ The login screen:
 
 ![Alt text](login.png?raw=true "Login")
 
+The home (lists) screen on login:
+
+![Alt text](home.png?raw=true "Home")
+
 The Links screen:
 
 ![Alt text](links.png?raw=true "Links")
