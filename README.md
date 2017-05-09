@@ -4,7 +4,7 @@ An application to enable you to login and have your own bookmarks so you don't n
 
 Add a list, say a holiday you are going on.
 Add a section to the list, say travel information.
-Add a link to the flight information section, say a link to the airline check-in website.
+Add a link to the travel information section, say a link to the airline check-in website.
 
 The login screen:
 
